@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -80,7 +80,25 @@ export default function ControleExternoSlug({
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/paginas`,
+  );
+  const paginas = await response.json();
+
+  const paths = paginas.map(({ slug }: PaginaDTO) => {
+    return {
+      params: { slug },
+    };
+  });
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export const getStaticProps: GetStaticProps = async (context) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/paginas/${context.params?.slug}`,
   );
@@ -90,5 +108,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     props: {
       pagina,
     },
+    revalidate: 1,
   };
 };
