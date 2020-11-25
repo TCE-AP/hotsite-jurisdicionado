@@ -49,7 +49,6 @@
     "dangerously-set-html-content": "^1.0.8",
     "next": "^10.0.1",
     "next-images": "^1.4.0",
-    "next-on-netlify": "^2.6.3",
     "postcss": "^8.1.7",
     "prop-types": "^15.7.2",
     "pure-react-carousel": "^1.27.6",
