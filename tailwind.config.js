@@ -4,8 +4,23 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: {
-    enabled: false,
+    enabled: true,
     content: ['./src/**/*.tsx'],
+    options: {
+      safelist: [
+        'bg-yellow-50',
+        'bg-blue-50',
+        'bg-gray-50 border-gray-700',
+        'bg-purple-50',
+        'bg-green-50',
+        'bg-red-50',
+        'text-yellow-700',
+        'text-blue-700',
+        'text-purple-700',
+        'text-green-700',
+        'text-red-700',
+      ],
+    },
   },
   darkMode: 'class',
   theme: {
