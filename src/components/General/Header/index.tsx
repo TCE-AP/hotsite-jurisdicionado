@@ -127,7 +127,19 @@ const Header: React.FC = () => {
                 <div className="pt-5 pb-6 px-5 space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <img className="h-8 w-auto" src={logoFull} alt="TCE-AP" />
+                      {theme === 'light' ? (
+                        <img
+                          className="h-8 w-auto"
+                          src={logoFull}
+                          alt="TCE-AP"
+                        />
+                      ) : (
+                        <img
+                          className="h-8 w-auto"
+                          src={logoFullBranco}
+                          alt="TCE-AP"
+                        />
+                      )}
                     </div>
                     <div className="-mr-2">
                       <button
