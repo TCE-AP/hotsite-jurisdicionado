@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
@@ -124,25 +124,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
   );
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas`,
-  );
-  const sistemas = await response.json();
-
-  const paths = sistemas.map(({ slug }: SistemaDTO) => {
-    return {
-      params: { slug },
-    };
-  });
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
-
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${context.params?.slug}`,
   );
