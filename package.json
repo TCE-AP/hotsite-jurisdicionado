@@ -7,7 +7,6 @@
     "tw:build": "tailwind build ./src/styles/index.css -o ./src/styles/toUglify.css && uglifycss ./src/styles/toUglify.css > ./src/styles/tailwind.css && rm ./src/styles/toUglify.css",
     "dev": "next dev",
     "build": "yarn tw:build && next build",
-    "postbuild": "next-on-netlify",
     "start": "next start",
     "test": "next test",
     "test:coverage": "yarn test --coverage --watchAll false"
