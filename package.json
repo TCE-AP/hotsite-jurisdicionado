@@ -7,6 +7,7 @@
     "tw:build": "tailwind build ./src/styles/index.css -o ./src/styles/toUglify.css && uglifycss ./src/styles/toUglify.css > ./src/styles/tailwind.css && rm ./src/styles/toUglify.css",
     "dev": "next dev",
     "build": "yarn tw:build && next build",
+    "postbuild": "next-on-netlify",
     "start": "next start",
     "test": "next test",
     "test:coverage": "yarn test --coverage --watchAll false"
@@ -48,6 +49,7 @@
     "dangerously-set-html-content": "^1.0.8",
     "next": "^10.0.1",
     "next-images": "^1.4.0",
+    "next-on-netlify": "^2.6.3",
     "postcss": "^8.1.7",
     "prop-types": "^15.7.2",
     "pure-react-carousel": "^1.27.6",

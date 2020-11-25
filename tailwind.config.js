@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: {
-    enabled: true,
+    enabled: false,
     content: ['./src/**/*.tsx'],
     options: {
       safelist: [
