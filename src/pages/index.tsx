@@ -9,6 +9,31 @@ const Home: React.FC = () => {
     <>
       <Head>
         <title>TCE-AP | Jurisdicionado</title>
+        <meta property="fb:app_id" content="410440873247656" />
+        <meta content="Jurisdicionado - TCE-AP" property="og:site_name" />
+        <meta
+          property="og:url"
+          content="https://jurisdicionado.tce.ap.gov.br"
+        />
+        <meta property="og:title" content="Portal do Jurisdicionado | TCE-AP" />
+        <meta
+          property="og:description"
+          content="Acesse nossos sistemas e projetos exclusivos para o Jurisdicionado do TCE-AP"
+        />
+        <meta content="/images/fachada.jpg" property="og:image" />
+        <meta content="article" property="og:type" />
+        <meta content="1100" property="og:image:width" />
+        <meta content="620" property="og:image:height" />
+
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@TCE_APoficial" />
+        <meta name="twitter:title" content="" />
+        <meta
+          name="twitter:description"
+          content="Acesse nossos sistemas e projetos exclusivos para o Jurisdicionado do TCE-AP"
+        />
+        <meta name="twitter:creator" content="@TCE_APoficial" />
+        <meta name="twitter:image" content="/images/fachada.jpg" />
       </Head>
       <div className="relative overflow-hidden">
         <div className="max-w-screen-xl mx-auto">

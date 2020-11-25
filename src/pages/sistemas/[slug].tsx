@@ -35,10 +35,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
         <>
           <title>TCE-AP | Jurisdicionado - {titulo}</title>
           <meta property="fb:app_id" content="410440873247656" />
-          <meta
-            property="og:site_name"
-            content="TCE-AP | Tribunal de Contas do Estado do Amapá"
-          />
+          <meta content="Jurisdicionado - TCE-AP" property="og:site_name" />
           <meta
             property="og:url"
             content={`${process.env.NEXT_PUBLIC_WEB_URL}/sistemas/${slug}`}

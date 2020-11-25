@@ -4,8 +4,6 @@ import React from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import '../styles/tailwind.css';
-import dynamic from 'next/dynamic';
-import InnerHTML from 'dangerously-set-html-content';
 import ToTop from '../components/General/ToTop';
 import Footer from '../components/General/Footer';
 import Header from '../components/General/Header';
@@ -13,17 +11,10 @@ import AppProvider from '../hooks';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import BannerCookies from '../components/BannerCookies';
 
-const VLibras = dynamic(() => import('../components/VlibrasComponent'), {
-  ssr: false,
-});
-
 function MyApp({ Component, pageProps }: AppProps) {
-  const script = `<script src="https://vlibras.gov.br/app/vlibras-plugin.js" />`;
-
-  return process.browser ? (
+  return (
     <AppProvider>
       <div id="inicio" className="dark:bg-black-apoio">
-        <div id="vlibras" />
         <Head>
           <>
             <meta
@@ -114,14 +105,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <BannerCookies />
         <Footer />
         <ToTop />
-        <VLibras />
-        <InnerHTML html={script} />
       </div>
     </AppProvider>
-  ) : (
-    <div>
-      <h1>Carregando...</h1>
-    </div>
   );
 }
 

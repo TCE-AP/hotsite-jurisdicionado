@@ -5,6 +5,7 @@ import React, {
   useContext,
   useEffect,
 } from 'react';
+import { useCookies } from 'react-cookie';
 import { useHotkeys } from 'react-hotkeys-hook';
 
 interface ThemeContextData {
@@ -15,22 +16,29 @@ interface ThemeContextData {
 const ThemeContext = createContext<ThemeContextData>({} as ThemeContextData);
 
 export const ThemeProvider: React.FC = ({ children }) => {
+  const [cookies, setCookie] = useCookies(['tema']);
+
   const [theme, setTheme] = useState(() => {
-    const mode = localStorage.getItem('@PortalTCEJuris:theme');
+    const mode = cookies.tema;
     if (mode) {
       return mode;
     }
-    localStorage.setItem('@PortalTCEJuris:theme', 'light');
+    setCookie('tema', 'light', {
+      path: '/',
+    });
     return 'light';
   });
 
   const toggleTheme = useCallback(() => {
-    setTheme((t) => (t === 'light' ? 'dark' : 'light'));
+    setTheme((t: string) => (t === 'light' ? 'dark' : 'light'));
   }, []);
 
   useEffect(() => {
-    theme && localStorage.setItem('@PortalTCEJuris:theme', theme);
-  }, [theme]);
+    theme &&
+      setCookie('tema', theme, {
+        path: '/',
+      });
+  }, [theme, setCookie]);
 
   useHotkeys('alt+4', () => toggleTheme());
 

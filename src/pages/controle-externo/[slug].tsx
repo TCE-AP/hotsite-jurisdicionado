@@ -12,7 +12,7 @@ interface PaginaProps {
 export default function ControleExternoSlug({
   pagina,
 }: PaginaProps): JSX.Element {
-  const { titulo, conteudo, slug, publicada } = pagina;
+  const { titulo, conteudo, slug } = pagina;
 
   const breadCrumbLinkItemCss =
     'text-blue-primary dark:text-gray-400 dark:hover:text-yellow-primary font-semibold hover:text-blue-apoio transition-colors duration-100';
@@ -23,26 +23,27 @@ export default function ControleExternoSlug({
         <>
           <title>TCE-AP | Jurisdicionado - {titulo}</title>
           <meta property="fb:app_id" content="410440873247656" />
-          <meta
-            property="og:site_name"
-            content="TCE-AP | Tribunal de Contas do Estado do Amapá"
-          />
+          <meta content="Jurisdicionado - TCE-AP" property="og:site_name" />
           <meta
             property="og:url"
             content={`${process.env.NEXT_PUBLIC_WEB_URL}/controle-externo/${slug}`}
           />
           <meta property="og:title" content={titulo} />
-          {/* <meta property="og:description" content={descricaoClean} /> */}
-          {/* <meta property="og:image" content={capa} /> */}
+          <meta
+            property="og:description"
+            content="Acesse nossos sistemas e projetos exclusivos para o Jurisdicionado do TCE-AP"
+          />
+          <meta
+            property="og:image"
+            content="https://jurisdicionado.tce.ap.gov.br/images/fachada.jpg"
+          />
           <meta property="og:type" content="article" />
           <meta property="og:image:width" content="1100" />
           <meta property="og:image:height" content="620" />
           <meta property="twitter:card" content="summary" />
           <meta property="twitter:site" content="@TCE_APoficial" />
           <meta property="twitter:title" content={titulo} />
-          {/* <meta property="twitter:description" content={descricaoClean} /> */}
           <meta property="twitter:creator" content="@TCE_APoficial" />
-          {/* <meta property="twitter:image" content={capa} /> */}
         </>
       </Head>
       <div className="bg-blue-primary dark:bg-gray-800 h-24 sm:h-36" />
