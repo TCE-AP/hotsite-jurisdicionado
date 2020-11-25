@@ -1,11 +1,11 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, TextareaHTMLAttributes } from 'react';
 import { useField } from '@unform/core';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends TextareaHTMLAttributes<HTMLTextAreaElement> {
   name: string;
 }
 
-const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
+const InputTextArea: React.FC<Props> = ({ name, disabled, ...rest }) => {
   const inputRef = useRef(null);
   const {
     fieldName,
@@ -29,9 +29,9 @@ const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
   return (
     <div>
       <div className="mt-1 relative rounded-md shadow-sm">
-        <input
+        <textarea
           ref={inputRef}
-          defaultValue={defaultValue}
+          rows={4}
           onFocus={clearError}
           disabled={disabled}
           className={`
@@ -42,7 +42,9 @@ const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
               : 'focus:ring-blue-500 dark:focus:ring-yellow-primary focus:border-blue-500 dark:focus:border-yellow-primary border-gray-300 dark:border-black-apoio'
           } block w-full shadow-sm py-3 px-4 placeholder-gray-500 rounded-md dark:bg-gray-800 dark:text-gray-400`}
           {...rest}
-        />
+        >
+          {defaultValue}
+        </textarea>
         {error && (
           <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
             <svg
@@ -64,4 +66,4 @@ const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
   );
 };
 
-export default Input;
+export default InputTextArea;

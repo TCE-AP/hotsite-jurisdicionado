@@ -1,11 +1,12 @@
-import React, { InputHTMLAttributes, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useField } from '@unform/core';
+import ReactInputMask, { Props as InputProps } from 'react-input-mask';
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends InputProps {
   name: string;
 }
 
-const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
+const InputMask: React.FC<Props> = ({ name, disabled, ...rest }) => {
   const inputRef = useRef(null);
   const {
     fieldName,
@@ -29,7 +30,7 @@ const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
   return (
     <div>
       <div className="mt-1 relative rounded-md shadow-sm">
-        <input
+        <ReactInputMask
           ref={inputRef}
           defaultValue={defaultValue}
           onFocus={clearError}
@@ -64,4 +65,4 @@ const Input: React.FC<Props> = ({ name, disabled, ...rest }) => {
   );
 };
 
-export default Input;
+export default InputMask;

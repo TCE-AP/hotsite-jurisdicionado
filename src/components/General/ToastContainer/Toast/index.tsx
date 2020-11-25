@@ -1,3 +1,4 @@
+import { Transition } from '@headlessui/react';
 import React, { useEffect } from 'react';
 import {
   FiAlertCircle,
@@ -10,17 +11,16 @@ import { ToastMessage, useToast } from '../../../../hooks/toast';
 
 interface ToastProps {
   toast: ToastMessage;
-  style: Record<string, unknown>;
 }
 
 const icons = {
-  info: <FiInfo size={24} />,
-  error: <FiAlertCircle size={24} />,
-  success: <FiCheckCircle size={24} />,
+  info: <FiInfo className="text-blue-400" size={24} />,
+  error: <FiAlertCircle className="text-red-400" size={24} />,
+  success: <FiCheckCircle className="text-green-400" size={24} />,
 };
 
-const Toast: React.FC<ToastProps> = ({ toast, style }) => {
-  const { removeToast } = useToast();
+const Toast: React.FC<ToastProps> = ({ toast }) => {
+  const { removeToast, show } = useToast();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -33,18 +33,46 @@ const Toast: React.FC<ToastProps> = ({ toast, style }) => {
   }, [toast.id, removeToast]);
 
   return (
-    <div style={style}>
-      {icons[toast.type || 'info']}
-
-      <div>
-        <strong>{toast.title}</strong>
-        {toast.description && <p>{toast.description}</p>}
+    <Transition
+      show={show}
+      enter="transform ease-out duration-300 transition"
+      enterFrom="translate-y-2 opacity-0 sm:translate-y-0 sm:translate-x-2"
+      enterTo="translate-y-0 opacity-100 sm:translate-x-0"
+      leave="transition ease-in duration-100"
+      leaveFrom="opacity-100"
+      leaveTo="opacity-0"
+      className="max-w-sm w-full bg-white shadow-lg rounded-lg pointer-events-auto max-h-28 overflow-hidden"
+    >
+      <div className="">
+        <div className="p-4">
+          <div className="flex items-start">
+            <div className="flex-shrink-0">{icons[toast.type || 'info']}</div>
+            <div className="ml-3 w-0 flex-1 pt-0.5">
+              <p className="text-sm leading-5 font-medium text-gray-900">
+                {toast.title}
+              </p>
+              {toast.description && (
+                <p className="mt-1 text-sm leading-5 text-gray-500">
+                  {toast.description}
+                </p>
+              )}
+            </div>
+            <div className="ml-4 flex-shrink-0 flex">
+              <button
+                type="button"
+                onClick={() => removeToast(toast.id)}
+                className="inline-flex focus:outline-none transition ease-in-out duration-150"
+              >
+                <FiXCircle
+                  className="text-gray-400 focus:text-gray-500"
+                  size={18}
+                />
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <button type="button" onClick={() => removeToast(toast.id)}>
-        <FiXCircle size={18} />
-      </button>
-    </div>
+    </Transition>
   );
 };
 

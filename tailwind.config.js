@@ -4,9 +4,10 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
   purge: {
-    enabled: false,
+    enabled: true,
     content: ['./src/**/*.tsx'],
   },
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -28,8 +29,8 @@ module.exports = {
   },
   variants: {},
   plugins: [
-    require('@tailwindcss/ui'),
-    require('@tailwindcss/custom-forms'),
+    require('@tailwindcss/forms'),
     require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio'),
   ],
 };

@@ -1,4 +1,4 @@
-interface Secao {
+export interface SecaoDTO {
   id: number;
   titulo: string;
   descricao: string;
@@ -6,12 +6,14 @@ interface Secao {
   descricaoClean: string;
 }
 
-interface Video {
+export interface VideoDTO {
+  id: number;
   titulo: string;
   link: string;
 }
 
-interface Pergunta {
+export interface PerguntaDTO {
+  id: number;
   pergunta: string;
   resposta: string;
 }
@@ -25,7 +27,7 @@ export default interface SistemaDTO {
   descricao: string;
   link: string;
   descricaoClean: string;
-  secoes: Secao[];
-  videos: Video[];
-  perguntas: Pergunta[];
+  secoes: SecaoDTO[];
+  videos: VideoDTO[];
+  perguntas: PerguntaDTO[];
 }

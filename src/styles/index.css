@@ -5,4 +5,8 @@ html {
     scroll-behavior: smooth
 }
 
+.carousel__dot--selected {
+    background-color: #3E72E1 !important
+}
+
 @tailwind utilities;
