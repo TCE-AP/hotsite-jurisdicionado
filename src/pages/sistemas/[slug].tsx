@@ -2,13 +2,15 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FiExternalLink } from 'react-icons/fi';
+import Skeleton from 'react-loading-skeleton';
 import NavegacaoSistemas from '../../components/Sistemas/Sistema/NavegacaoSistemas';
 import PerguntaSection from '../../components/Sistemas/Sistema/PerguntaSection';
 import SecaoSection from '../../components/Sistemas/Sistema/SecaoSection';
 import VideoSection from '../../components/Sistemas/Sistema/VideoSection';
 import SistemaDTO from '../../dtos/SistemaDTO';
+import { useApi } from '../../hooks/useApi';
 
 interface SistemaProps {
   sistema: SistemaDTO;
@@ -26,6 +28,17 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
     link,
     descricao,
   } = sistema;
+
+  const [loadedSistema, setLoadedSistema] = useState<SistemaDTO>();
+
+  const { data, error } = useApi(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${slug}`,
+  );
+
+  useEffect(() => {
+    setLoadedSistema(data);
+  }, [data]);
+
   const breadCrumbLinkItemCss =
     'text-blue-primary dark:text-gray-400 font-semibold hover:text-blue-apoio transition-colors duration-100';
 
@@ -86,35 +99,63 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                   Sistemas
                 </p>
                 <h1 className="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-yellow-primary sm:text-4xl sm:leading-10">
-                  {titulo}
+                  {loadedSistema ? (
+                    loadedSistema.titulo
+                  ) : (
+                    <div className="mx-auto w-64">
+                      <Skeleton />
+                    </div>
+                  )}
                 </h1>
               </div>
-              {capa && (
+              {loadedSistema ? (
                 <img
                   src={capa}
                   className="mx-auto rounded-lg h-24 md:h-44"
                   alt={`logo ${titulo}`}
                 />
-              )}
-              <div className="my-5 sm:flex justify-center">
-                <div className="rounded-md shadow">
-                  <a
-                    href={link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white dark:text-gray-600 bg-blue-600 dark:bg-yellow-primary hover:bg-blue-apoio dark:hover:bg-yellow-primary focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-2 md:text-lg md:px-20"
-                  >
-                    Acessar
-                    <FiExternalLink className="ml-2" size={18} />
-                  </a>
+              ) : (
+                <div className="mx-auto w-2/5">
+                  <Skeleton height="10rem" />
                 </div>
-              </div>
-              <div
-                className="prose prose-lg text-gray-500 dark:text-gray-400 mx-auto mt-2 text-justify"
-                dangerouslySetInnerHTML={{ __html: descricao }}
-              />
-              {secoes.length > 0 && <SecaoSection secoes={secoes} />}
-              {videos.length > 0 && <VideoSection videos={videos} />}
+              )}
+
+              {loadedSistema ? (
+                <div className="my-5 sm:flex justify-center">
+                  <div className="rounded-md shadow">
+                    <a
+                      href={link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white dark:text-gray-600 bg-blue-600 dark:bg-yellow-primary hover:bg-blue-apoio dark:hover:bg-yellow-primary focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-2 md:text-lg md:px-20"
+                    >
+                      Acessar
+                      <FiExternalLink className="ml-2" size={18} />
+                    </a>
+                  </div>
+                </div>
+              ) : (
+                <div className="mx-auto w-64">
+                  <Skeleton height="3rem" />
+                </div>
+              )}
+              {loadedSistema ? (
+                <div
+                  className="prose prose-lg text-gray-500 dark:text-gray-400 mx-auto mt-2 text-justify"
+                  dangerouslySetInnerHTML={{ __html: descricao }}
+                />
+              ) : (
+                <div className="mx-auto w-2/3">
+                  <Skeleton count={10} />
+                </div>
+              )}
+
+              {loadedSistema && loadedSistema.secoes.length > 0 && (
+                <SecaoSection secoes={secoes} />
+              )}
+              {loadedSistema && loadedSistema.videos.length > 0 && (
+                <VideoSection videos={videos} />
+              )}
             </div>
           </div>
         </div>
