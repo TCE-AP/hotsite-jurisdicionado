@@ -56,12 +56,10 @@ const Home: React.FC = () => {
                   Jurisdicionado
                 </h1>
                 <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  O Tribunal de Contas do Estado do Amapá, TCE-AP, disponibiliza
-                  em um único local todos os sistemas, recursos, downloads e
-                  demais informações de interesse dos jurisdicionados, provendo
-                  muito mais praticidade, rapidez e comodidade no acesso às
-                  informações necessárias para execução de suas obrigações junto
-                  ao TCE-AP.
+                  Centralizando nossos sistemas, recursos, downloads e demais
+                  informações de interesse dos jurisdicionados, para prover mais
+                  praticidade, rapidez e comodidade no acesso às informações
+                  necessárias para execução de suas obrigações junto ao TCE-AP.
                 </p>
                 <div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                   <div className="rounded-md shadow">
@@ -97,8 +95,7 @@ const Home: React.FC = () => {
               Sistemas e Fiscalizações
             </h3>
             <p className="mt-4 max-w-2xl text-xl leading-7 text-gray-500 lg:mx-auto">
-              Todos os serviços do TCE-AP para os seus Jurisdicionados em um só
-              lugar
+              Todos os serviços do TCE-AP para os Jurisdicionados em um só lugar
             </p>
           </div>
           <Sistemas />
