@@ -83,7 +83,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
           </li>
           <li className="mx-2 dark:text-gray-500">•</li>
           <li className="text-gray-500 dark:text-yellow-primary font-semibold">
-            {titulo}
+            {loadedSistema ? loadedSistema.titulo : titulo}
           </li>
         </ul>
       </nav>
@@ -110,9 +110,9 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
               </div>
               {loadedSistema ? (
                 <img
-                  src={capa}
+                  src={loadedSistema.capa}
                   className="mx-auto rounded-lg h-24 md:h-44"
-                  alt={`logo ${titulo}`}
+                  alt={`logo ${loadedSistema.titulo}`}
                 />
               ) : (
                 <div className="mx-auto w-2/5">
@@ -124,7 +124,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                 <div className="my-5 sm:flex justify-center">
                   <div className="rounded-md shadow">
                     <a
-                      href={link}
+                      href={loadedSistema.link}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white dark:text-gray-600 bg-blue-600 dark:bg-yellow-primary hover:bg-blue-apoio dark:hover:bg-yellow-primary focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-2 md:text-lg md:px-20"
@@ -142,7 +142,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
               {loadedSistema ? (
                 <div
                   className="prose prose-lg text-gray-500 dark:text-gray-400 mx-auto mt-2 text-justify"
-                  dangerouslySetInnerHTML={{ __html: descricao }}
+                  dangerouslySetInnerHTML={{ __html: loadedSistema.descricao }}
                 />
               ) : (
                 <div className="mx-auto w-2/3">
@@ -151,15 +151,17 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
               )}
 
               {loadedSistema && loadedSistema.secoes.length > 0 && (
-                <SecaoSection secoes={secoes} />
+                <SecaoSection secoes={loadedSistema.secoes} />
               )}
               {loadedSistema && loadedSistema.videos.length > 0 && (
-                <VideoSection videos={videos} />
+                <VideoSection videos={loadedSistema.videos} />
               )}
             </div>
           </div>
         </div>
-        {perguntas.length > 0 && <PerguntaSection perguntas={perguntas} />}
+        {loadedSistema && loadedSistema.perguntas.length > 0 && (
+          <PerguntaSection perguntas={loadedSistema.perguntas} />
+        )}
       </main>
     </div>
   );
