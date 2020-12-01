@@ -32,12 +32,12 @@ const VideoSection: React.FC<VideoSectionProps> = ({ videos }) => (
       ))}
     </Slider>
     {videos.length > 1 && (
-      <div className="text-center mt-2 flex px-24">
+      <div className="justify-center mt-2 flex space-x-2">
         {videos.map(({ id }, i) => (
           <Dot
             key={id}
             slide={i}
-            className="bg-gray-400 h-1 flex-1 outline-none focus:outline-none"
+            className="bg-gray-400 h-4 w-4 rounded focus:outline-none "
           />
         ))}
       </div>
