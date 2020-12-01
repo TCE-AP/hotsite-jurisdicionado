@@ -28,8 +28,8 @@ const ContatoSection: React.FC = () => {
                   fontSizeText === 'text-base' ? 'text-lg' : fontSizeText
                 } leading-7 text-gray-500`}
               >
-                Nullam risus blandit ac aliquam justo ipsum. Quam mauris
-                volutpat massa dictumst amet. Sapien tortor lacus arcu.
+                O TCE-AP quer lhe ouvir! Entre em contato conosco por um dos
+                nossos canais de atendimento, ou faça-nos uma visita.
               </p>
             </div>
             <div className="mt-9">
@@ -50,7 +50,8 @@ const ContatoSection: React.FC = () => {
                   </svg>
                 </div>
                 <div className="ml-3 leading-6 text-gray-500">
-                  <p>+55 (96) 2101-4700</p>
+                  <a href="tel:08007214702">0800 721 4702</a>
+                  <a href="tel:+559621004790">+55 (96) 2100-4790</a>
                   <p className="mt-1">
                     Funcionamento Segunda à Sexta - 7:30 às 13:30
                   </p>
@@ -76,7 +77,7 @@ const ContatoSection: React.FC = () => {
                   </svg>
                 </div>
                 <div className="ml-3 leading-6 text-gray-500">
-                  <p>support@example.com</p>
+                  <p>ouvidoria@tce.ap.gov.br</p>
                 </div>
               </div>
             </div>
