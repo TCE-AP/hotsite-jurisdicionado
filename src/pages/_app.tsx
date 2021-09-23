@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-import React from 'react';
+import React, { useCallback } from 'react';
 import Head from 'next/head';
 import type { AppProps } from 'next/app';
 import '../styles/tailwind.css';
@@ -8,11 +8,43 @@ import ToTop from '../components/General/ToTop';
 import Footer from '../components/General/Footer';
 import Header from '../components/General/Header';
 import AppProvider from '../hooks';
+import { animateScroll as scroll } from 'react-scroll';
 import 'pure-react-carousel/dist/react-carousel.es.css';
 import BannerCookies from '../components/BannerCookies';
 import logoFull from '../assets/logo-com-texto.svg';
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const onKeyUp = useCallback((keyName, e, handle) => {
+    if (keyName === 'shift+1')
+      irPara('__conteudo', '__conteudo_fallback');
+    else if (keyName === 'shift+2')
+      irPara('__menu');
+    else if (keyName === 'shift+3')
+      irPara('__rodape');
+  }, []);
+
+  const onKeyDown = useCallback((keyName, e, handle) => {
+    // console.log("test:onKeyDown", keyName, e, handle);
+  }, []);
+
+  const irPara = useCallback((anchorId: string, fallbackAnchorId?: string) => {
+    let element = document.getElementById(anchorId);
+
+    if (!element) {
+      if (fallbackAnchorId)
+        element = document.getElementById(fallbackAnchorId);
+      else
+        return;
+    }
+
+    if (element) {
+      const top = element.offsetTop;
+      scroll.scrollTo(top, {
+        duration: 400,
+      });
+    }
+  }, []);
+
   return process.browser ? (
     <AppProvider>
       <div id="inicio" className="dark:bg-black-apoio">
@@ -102,7 +134,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           </>
         </Head>
         <Header />
-        <Component {...pageProps} />
+        <div id="__conteudo_fallback">
+          <Component {...pageProps} />
+        </div>
         <BannerCookies />
         <Footer />
         <ToTop />

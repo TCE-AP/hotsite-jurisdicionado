@@ -14,10 +14,11 @@ const HeaderLinks: React.FC = () => {
 
   return (
     <nav className="grid gap-4 lg:gap-0 lg:flex md:space-x-3 xl:space-x-5">
-      {menuTree &&
-        menuTree.tree.map((item) => (
-          <HeaderLinkItem key={item.id} item={item} />
-        ))}
+      {menuTree && menuTree.tree.map((item) => {
+        if (item.id === 4) // id 4 = PÁGINA INICIAL
+          return null;
+        return <HeaderLinkItem key={item.id} item={item} />;
+      })}
     </nav>
   );
 };

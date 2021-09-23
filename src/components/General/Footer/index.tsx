@@ -70,7 +70,7 @@ const Footer: React.FC = () => {
 
   return (
     <>
-      <div className="bg-white dark:bg-black-apoio container mx-auto">
+      <div className="bg-white dark:bg-black-apoio container mx-auto" id="__rodape">
         <div className="max-w-screen-xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
           <nav className="-mx-5 -my-2 flex flex-wrap justify-center">
             {menu.map((item) => (

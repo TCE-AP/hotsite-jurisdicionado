@@ -1,23 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
+import { FiMoon, FiSun } from 'react-icons/fi';
+import { ImAccessibility } from 'react-icons/im';
+import { GiHearingDisabled } from 'react-icons/gi';
+import { FaBlind, FaSitemap } from 'react-icons/fa';
 import { Transition } from '@headlessui/react';
 import Link from 'next/link';
-import { FiMoon, FiSun } from 'react-icons/fi';
-import HeaderLinks from './HeaderLinks';
-import logoFull from '../../../assets/logo-com-texto.svg';
-import logoFullBranco from '../../../assets/logo-com-texto-branco.svg';
 import { useFontSize } from '../../../hooks/fontSize';
 import { useTheme } from '../../../hooks/theme';
+import HeaderLinks from './HeaderLinks';
+import logoFull from '../../../assets/logo-com-texto.svg';
+
+const tceUrl = process.env['NEXT_PUBLIC_TCE_URL'] ?? 'https://tceap.tc.br';
 
 const Header: React.FC = () => {
   const [mobileMenuShow, setMobileMenuShow] = useState(false);
 
-  const {
-    fontSizeText,
-    increaseFontSize,
-    decreaseFontSize,
-    normalizeFontSize,
-  } = useFontSize();
+  const { fontSizeText, increaseFontSize, decreaseFontSize, normalizeFontSize } = useFontSize();
 
   const { theme, toggleTheme } = useTheme();
 
@@ -25,66 +24,90 @@ const Header: React.FC = () => {
     setMobileMenuShow(!mobileMenuShow);
   }
 
+  const irPara = (e: React.MouseEvent, anchorId: string, fallbackAnchorId?: string) => {
+    e.preventDefault();
+
+    let element = document.getElementById(anchorId);
+
+    if (!element) {
+      if (fallbackAnchorId)
+        element = document.getElementById(fallbackAnchorId);
+      else
+        return;
+    }
+
+    if (element) {
+      const top = element.offsetTop;
+      window.scrollTo(0, top);
+    }
+  };
+
   return (
     <>
-      <div className="bg-gray-100 leading-6">
+      <div className="bg-gray-100 dark:bg-gray-800 dark:text-white leading-6">
         <div
           className={`${
             fontSizeText === 'text-base' ? 'text-sm' : fontSizeText
-          } max-w-7xl px-4 sm:px-6 md:mx-auto flex flex-wrap py-5`}
+          } max-w-7xl px-4 sm:px-6 md:mx-auto flex flex-wrap py-1`}
         >
-          <div className="flex-grow font-semibold text-gray-500 uppercase">
-            <div className="flex flex-wrap flex-col md:flex-row">
-              <a className="md:w-auto" href="tel:+559621014700">
-                TEL +55 (96) 2101-4700
+          <div className="flex-grow font-semibold text-gray-500 dark:text-white hidden lg:flex items-center">
+            <div className="flex flex-wrap flex-col md:flex-row text-xs">
+              <a href="#" className="md:w-auto" onClick={e => irPara(e, '__conteudo', '__conteudo_fallback')}>
+                <span title="Shift+1">Ir Para Conteúdo [1]</span>
               </a>
-              <a href="/" className="md:mx-4 md:w-auto">
-                Acesso a Informação
+              <a href="#" className="md:mx-4 md:w-auto" onClick={e => irPara(e, '__menu')}>
+                <span title="Shift+2">Ir Para Menu [2]</span>
               </a>
-              <a href="/" className="md:w-auto">
-                Transparência
+              <a href="#" className="md:w-auto" onClick={e => irPara(e, '__rodape')}>
+                <span title="Shift+3">Ir Para Rodapé [3]</span>
               </a>
             </div>
           </div>
-          <div className="text-right self-center space-x-2 flex text-gray-500">
+          <div className="text-right self-center space-x-4 flex text-gray-500 dark:text-white">
             <button type="button" className="flex" onClick={increaseFontSize}>
-              <sup>(1)</sup>A+
+              A+
             </button>
             <button type="button" className="flex" onClick={normalizeFontSize}>
-              <sup>(2)</sup>A
+              A
             </button>
             <button type="button" className="flex" onClick={decreaseFontSize}>
-              <sup>(3)</sup>A-
+              A-
             </button>
+            <a href={`${tceUrl}/paginas/acessibilidade`} className="flex">
+              <ImAccessibility className="self-center" />
+            </a>
+            <a href={`${tceUrl}/paginas/leitor-de-tela-nvda`} className="flex">
+              <FaBlind className="self-center" />
+            </a>
+            <a href={`${tceUrl}/paginas/vlibras-traducao-de-portugues-pra-libras`} className="flex">
+              <GiHearingDisabled className="self-center" />
+            </a>
             <button type="button" className="flex" onClick={toggleTheme}>
-              <sup>(4)</sup>
               {theme === 'dark' ? (
                 <FiSun className="self-center" />
               ) : (
                 <FiMoon className="self-center" />
               )}
             </button>
+            <a href={`${tceUrl}/mapa-do-site`} className="flex">
+              <FaSitemap className="self-center" />
+            </a>
           </div>
         </div>
       </div>
 
-      <div className="transition duration-300 shadow bg-white dark:bg-black-apoio relative z-20">
-        <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 justify-between items-center py-6 lg:justify-start lg:space-x-10">
+      <div
+        className="transition duration-300 shadow bg-white dark:bg-gray-700 sticky top-0 z-20" id="__menu"
+      >
+        <div className="flex max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 justify-between items-center lg:justify-start lg:space-x-10">
           <Link href="/">
             <a className="flex">
-              {theme === 'dark' ? (
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src={logoFullBranco}
-                  alt="Tribunal de Contas do Estado do Amapá"
-                />
-              ) : (
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src={logoFull}
-                  alt="Tribunal de Contas do Estado do Amapá"
-                />
-              )}
+              <img
+                className="h-12 w-auto sm:h-10"
+                src={logoFull}
+                alt="Tribunal de Contas do Estado do Amapá"
+                style={theme === 'dark' ? { filter: 'invert(1) contrast(200%)' } : {}}
+              />
             </a>
           </Link>
           <div className="-mr-2 -my-2 lg:hidden">
@@ -93,12 +116,7 @@ const Header: React.FC = () => {
               onClick={handleMobileMenuShow}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
             >
-              <svg
-                className="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -112,6 +130,7 @@ const Header: React.FC = () => {
             <HeaderLinks />
           </div>
         </div>
+
         <Transition
           show={mobileMenuShow}
           enter="duration-200 ease-out"
@@ -121,45 +140,24 @@ const Header: React.FC = () => {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
-          <div className="absolute top-0 inset-x-0 z-10 p-2 transition transform origin-top-right lg:hidden">
+          <div className="absolute top-0 inset-x-0 z-20 p-2 transition transform origin-top-right lg:hidden">
             <div className="rounded-lg shadow-lg">
-              <div className="bg-white dark:bg-black-apoio rounded-lg shadow-xs divide-y-2 divide-gray-50">
+              <div className="bg-white dark:bg-gray-700 rounded-lg shadow-xs divide-y-2 divide-gray-50">
                 <div className="pt-5 pb-6 px-5 space-y-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      {theme === 'light' ? (
-                        <img
-                          className="h-8 w-auto"
-                          src={logoFull}
-                          alt="TCE-AP"
-                        />
-                      ) : (
-                        <img
-                          className="h-8 w-auto"
-                          src={logoFullBranco}
-                          alt="TCE-AP"
-                        />
-                      )}
+                      <img
+                        className="h-8 w-auto"
+                        src={logoFull}
+                        alt="TCE-AP"
+                        style={theme === 'dark' ? { filter: 'invert(1) contrast(200%)' } : {}}
+                      />
                     </div>
                     <div className="-mr-2">
                       <button
                         type="button"
                         onClick={handleMobileMenuShow}
-                        className="
-                          inline-flex
-                          items-center
-                          justify-center
-                          p-2
-                          rounded-md
-                          text-gray-400
-                          hover:text-gray-500
-                          hover:bg-gray-100
-                          focus:outline-none
-                          focus:bg-gray-100
-                          focus:text-gray-500
-                          transition
-                          duration-150
-                          ease-in-out"
+                        className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
                       >
                         <svg
                           className="h-6 w-6"
