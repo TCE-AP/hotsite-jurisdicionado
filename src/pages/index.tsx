@@ -101,7 +101,7 @@ const Home: React.FC = () => {
           <Sistemas />
         </div>
       </div>
-      <ContatoSection />
+      {/* <ContatoSection /> */}
     </>
   );
 };
