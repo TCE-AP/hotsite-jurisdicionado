@@ -43,12 +43,9 @@ const BannerCookies: React.FC = () => {
                   </svg>
                 </span>
                 <p className="mx-3 font-medium text-white">
-                  Este site armazena dados como cookies para habilitar a
-                  funcionalidade necessária, incluindo análises, segmentação e
-                  personalização.{' '}
-                  <Link href="/politica-de-privacidade">
-                    <a className="text-blue-300">Política de Privacidade</a>
-                  </Link>
+                  O Tribunal de Contas do Amapá utiliza cookies em seu portal para controle de navegação no site e geração de informações estatísticas de acordo com nossa <Link href="https://tceap.tc.br/institucional/politica-de-privacidade">
+                    <a className="text-blue-300" target="_blank">Política de Privacidade</a>
+                  </Link>. Ao utilizar nossos serviços, você concorda com essas condições.
                 </p>
               </div>
               <div className="mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
