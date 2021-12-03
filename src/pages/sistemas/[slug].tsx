@@ -121,19 +121,21 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
               )}
 
               {loadedSistema ? (
-                <div className="my-5 sm:flex justify-center">
-                  <div className="rounded-md shadow">
-                    <a
-                      href={loadedSistema.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white dark:text-gray-600 bg-blue-600 dark:bg-yellow-primary hover:bg-blue-apoio dark:hover:bg-yellow-primary focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-2 md:text-lg md:px-20"
-                    >
-                      Acessar
-                      <FiExternalLink className="ml-2" size={18} />
-                    </a>
+                (loadedSistema.link !== '-' && loadedSistema.link !== 'none') && (
+                  <div className="my-5 sm:flex justify-center">
+                    <div className="rounded-md shadow">
+                      <a
+                        href={loadedSistema.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white dark:text-gray-600 bg-blue-600 dark:bg-yellow-primary hover:bg-blue-apoio dark:hover:bg-yellow-primary focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-2 md:text-lg md:px-20"
+                      >
+                        Acessar
+                        <FiExternalLink className="ml-2" size={18} />
+                      </a>
+                    </div>
                   </div>
-                </div>
+                )
               ) : (
                 <div className="mx-auto w-64">
                   <Skeleton height="3rem" />
