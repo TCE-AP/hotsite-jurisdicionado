@@ -28,7 +28,7 @@ export default function PaginasSlug({ pagina }: PaginaProps): JSX.Element {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/paginas`);
-  const paginas = await response.json();
+  const paginas: any[] = await response.json();
 
   const paths = paginas.map((pagina) => {
     return {

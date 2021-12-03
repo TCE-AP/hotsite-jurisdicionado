@@ -64,7 +64,7 @@ const HeaderLinkSubItem: React.FC<HeaderLinkSubItemProps> = ({ item, mobile }) =
             </div>
 
             <div className="px-6">
-              {child.map((item, idx) => (
+              {child!.map((item, idx) => (
                 <HeaderLinkSubItem key={idx} item={item} />
               ))}
             </div>
@@ -110,7 +110,7 @@ const HeaderLinkSubItem: React.FC<HeaderLinkSubItemProps> = ({ item, mobile }) =
             ref={setPopperElement}
             {...attributes.popper}
           >
-            {child.map((item, idx) => (
+            {child!.map((item, idx) => (
               <HeaderLinkSubItem key={idx} item={item} />
             ))}
           </div>
