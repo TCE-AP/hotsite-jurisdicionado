@@ -23,7 +23,7 @@ const NavegacaoSistemas: React.FC<NavegacaoSistemasProps> = ({ slug }) => {
   const toggleOpen = useCallback(() => setOpen(!open), [open]);
   return (
     <>
-      <div className="hidden lg:block sticky top-0 pt-10">
+      <div className="hidden lg:block sticky top-10 pt-10">
         <h3 className="text-blue-apoio dark:text-yellow-primary font-semibold text-xl mb-2 pl-2 border-l-4 border-blue-apoio dark:border-gray-600">
           Sistemas e Fiscalizações
         </h3>
