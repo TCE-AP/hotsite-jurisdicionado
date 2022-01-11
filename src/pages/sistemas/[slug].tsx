@@ -143,7 +143,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
               )}
               {loadedSistema ? (
                 <div
-                  className="prose prose-lg text-gray-500 dark:text-gray-400 mx-auto mt-2 text-justify"
+                  className="prose prose-lg text-gray-600 dark:text-gray-400 mx-auto mt-2 text-justify"
                   dangerouslySetInnerHTML={{ __html: loadedSistema.descricao }}
                 />
               ) : (

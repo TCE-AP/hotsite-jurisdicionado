@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "tw:dev": "tailwind build -i ./src/styles/index.css -o ./src/styles/tailwind.css",
+    "tw:watch": "tailwind build -i ./src/styles/index.css -o ./src/styles/tailwind.css --watch",
     "tw:build": "tailwind build -i ./src/styles/index.css -o ./src/styles/toUglify.css && uglifycss ./src/styles/toUglify.css > ./src/styles/tailwind.css && rm ./src/styles/toUglify.css",
     "dev": "next dev",
     "build": "yarn tw:build && next build",
@@ -67,7 +68,7 @@
     "react-uuid": "^1.0.2",
     "styled-components": "^5.1.1",
     "swr": "^0.2.3",
-    "tailwindcss": "^2.0.1",
+    "tailwindcss": "^2.0.2",
     "uuidv4": "^6.2.5",
     "yup": "^0.29.2"
   },

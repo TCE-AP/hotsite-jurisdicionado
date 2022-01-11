@@ -8,15 +8,13 @@ interface SecaoSectionProps {
 
 const SecaoSection: React.FC<SecaoSectionProps> = ({ secoes }) => {
   return (
-    <section className="text-gray-500 mx-auto my-4">
-      <div className="prose prose-lg mx-auto">
-        <div className="flex flex-wrap">
-          {secoes.map((secao) => (
-            <Secao key={secao.id} secao={secao} />
-          ))}
-        </div>
+    <div className="my-6">
+      <div className="flex flex-wrap justify-center">
+        {secoes.map((secao) => (
+          <Secao key={secao.id} secao={secao} />
+        ))}
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
 export interface SecaoDTO {
   id: number;
   titulo: string;
-  descricao: string;
-  cor: string;
-  descricaoClean: string;
+  // descricao: string;
+  // cor: string;
+  // descricaoClean: string;
+  link: string;
+  icone: string;
 }
 
 export interface VideoDTO {

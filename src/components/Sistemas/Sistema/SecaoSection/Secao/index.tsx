@@ -6,16 +6,13 @@ interface SecaoProps {
 }
 
 const Secao: React.FC<SecaoProps> = ({ secao }) => {
-  const { cor, titulo, descricao } = secao;
+  const { titulo, link, icone } = secao;
   return (
-    <div className="mb-4 text-base w-full">
-      <div className={`${cor} px-4 py-2 rounded-lg shadow`}>
-        <h5 className="font-semibold">{titulo}</h5>
-        <div
-          className="text-gray-700"
-          dangerouslySetInnerHTML={{ __html: descricao }}
-        />
-      </div>
+    <div className="m-2 p-2 rounded-lg shadow">
+      {/* <h5 className="font-semibold">{titulo}</h5> */}
+      <a href={link}>
+        <img src={icone} alt={titulo} className="w-48 h-auto" />
+      </a>
     </div>
   );
 };
