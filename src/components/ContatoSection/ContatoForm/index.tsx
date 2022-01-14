@@ -93,7 +93,7 @@ const ContatoForm: React.FC = () => {
         setEnviando(false);
         formRef.current?.reset();
       } catch (err) {
-        const errors = getValidationErrors(err);
+        const errors = getValidationErrors(err as any);
         recaptchaRef.current?.reset();
         formRef.current?.setErrors(errors);
 
