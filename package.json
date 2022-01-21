@@ -8,7 +8,7 @@
     "tw:build": "tailwind build -i ./src/styles/index.css -o ./src/styles/toUglify.css && uglifycss ./src/styles/toUglify.css > ./src/styles/tailwind.css && rm ./src/styles/toUglify.css",
     "dev": "next dev",
     "build": "yarn tw:build && next build",
-    "start": "next start",
+    "start": "NODE_ENV=production node server.js",
     "test": "next test",
     "test:coverage": "yarn test --coverage --watchAll false"
   },
