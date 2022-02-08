@@ -5,7 +5,7 @@ const { parse } = require('url');
 var root = '/home/deployer/';
 
 const next = require('next')
-const port = 3001; //parseInt(process.env.PORT, 10) || config.getPort()
+const port = 3000; //parseInt(process.env.PORT, 10) || config.getPort()
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev, dir: __dirname })
 const handle = app.getRequestHandler()

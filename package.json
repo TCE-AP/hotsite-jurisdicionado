@@ -9,6 +9,7 @@
     "dev": "next dev",
     "build": "yarn tw:build && next build",
     "start": "NODE_ENV=production node server.js",
+    "start-http": "next start -p 3001",
     "test": "next test",
     "test:coverage": "yarn test --coverage --watchAll false"
   },
