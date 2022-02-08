@@ -16,12 +16,17 @@ interface SistemaProps {
   sistema: SistemaDTO;
 }
 
+const sistemaCiclo2Slug = 'levantamento-de-receitas-segundo-ciclo';
+const breadCrumbLinkItemCss =
+    'text-blue-primary dark:text-gray-400 font-semibold hover:text-blue-apoio transition-colors duration-100';
+
 export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
   const {
     titulo,
     slug,
     capa,
     descricaoClean,
+    sigla,
     videos,
     secoes,
     perguntas,
@@ -29,18 +34,22 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
     descricao,
   } = sistema;
 
-  const [loadedSistema, setLoadedSistema] = useState<SistemaDTO>();
+  const isReceitas = sigla === 'RECEITAS';
 
-  const { data, error } = useApi(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${slug}`,
-  );
+  const [sistemaCiclo2, setSistemaCiclo2] = useState<SistemaDTO | undefined>();
+  const [cicloTab, setCicloTab] = useState<1 | 2>(1);
 
   useEffect(() => {
-    setLoadedSistema(data);
-  }, [data]);
+    if (isReceitas) {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${sistemaCiclo2Slug}`)
+        .then(response => response.json())
+        .then(json => {
+          setSistemaCiclo2(json);
+        });
+    }
+  }, []);
 
-  const breadCrumbLinkItemCss =
-    'text-blue-primary dark:text-gray-400 font-semibold hover:text-blue-apoio transition-colors duration-100';
+  console.log(sistemaCiclo2);
 
   return (
     <div className="dark:bg-gray-900">
@@ -83,7 +92,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
           </li>
           <li className="mx-2 dark:text-gray-500">•</li>
           <li className="text-gray-500 dark:text-yellow-primary font-semibold">
-            {loadedSistema ? loadedSistema.titulo : titulo}
+            {sistema ? sistema.titulo : titulo}
           </li>
         </ul>
       </nav>
@@ -99,8 +108,8 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                   Sistemas
                 </p>
                 <h1 className="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-yellow-primary sm:text-4xl sm:leading-10">
-                  {loadedSistema ? (
-                    loadedSistema.titulo
+                  {sistema ? (
+                    sistema.titulo
                   ) : (
                     <div className="mx-auto w-64">
                       <Skeleton />
@@ -108,11 +117,11 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                   )}
                 </h1>
               </div>
-              {loadedSistema ? (
+              {sistema ? (
                 <img
-                  src={loadedSistema.capa}
+                  src={sistema.capa}
                   className="mx-auto rounded-lg h-24 md:h-44"
-                  alt={`logo ${loadedSistema.titulo}`}
+                  alt={`logo ${sistema.titulo}`}
                 />
               ) : (
                 <div className="mx-auto w-2/5">
@@ -120,12 +129,12 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                 </div>
               )}
 
-              {loadedSistema ? (
-                (loadedSistema.link !== '-' && loadedSistema.link !== 'none') && (
+              {sistema ? (
+                (sistema.link !== '-' && sistema.link !== 'none') && (
                   <div className="my-5 sm:flex justify-center">
                     <div className="rounded-md shadow">
                       <a
-                        href={loadedSistema.link}
+                        href={sistema.link}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="w-full flex items-center justify-center px-8 py-2 border border-transparent text-base leading-6 font-medium rounded-md text-white dark:text-gray-600 bg-blue-600 dark:bg-yellow-primary hover:bg-blue-apoio dark:hover:bg-yellow-primary focus:outline-none focus:border-blue-700 focus:shadow-outline-blue transition duration-150 ease-in-out md:py-2 md:text-lg md:px-20"
@@ -141,10 +150,10 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                   <Skeleton height="3rem" />
                 </div>
               )}
-              {loadedSistema ? (
+              {sistema ? (
                 <div
                   className="prose prose-lg text-gray-600 dark:text-gray-400 mx-auto mt-2 text-justify"
-                  dangerouslySetInnerHTML={{ __html: loadedSistema.descricao }}
+                  dangerouslySetInnerHTML={{ __html: sistema.descricao }}
                 />
               ) : (
                 <div className="mx-auto w-2/3">
@@ -152,22 +161,50 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
                 </div>
               )}
 
-              {loadedSistema && loadedSistema.secoes.length > 0 && (
-                <SecaoSection secoes={loadedSistema.secoes} />
+              {(!isReceitas || !sistemaCiclo2) && sistema.secoes.length > 0 && (
+                <SecaoSection secoes={sistema.secoes} />
               )}
-              {loadedSistema && loadedSistema.videos.length > 0 && (
-                <VideoSection videos={loadedSistema.videos} />
+
+              {(isReceitas && sistemaCiclo2) && (
+                <div>
+                  <div className="flex justify-center items-center space-x-3">
+                    <_TabButton label="Ciclo 1" onClick={() => { setCicloTab(1) }} isAtivo={cicloTab === 1} />
+                    <_TabButton label="Ciclo 2" onClick={() => { setCicloTab(2) }} isAtivo={cicloTab === 2} />
+                  </div>
+
+                  {cicloTab === 1 && <SecaoSection secoes={sistema.secoes} />}
+                  {cicloTab === 2 && <SecaoSection secoes={sistemaCiclo2.secoes} />}
+                </div>
+              )}
+
+              {sistema.videos.length > 0 && (
+                <VideoSection videos={sistema.videos} />
               )}
             </div>
           </div>
         </div>
-        {loadedSistema && loadedSistema.perguntas.length > 0 && (
-          <PerguntaSection perguntas={loadedSistema.perguntas} />
+        {sistema.perguntas.length > 0 && (
+          <PerguntaSection perguntas={sistema.perguntas} />
         )}
       </main>
     </div>
   );
 }
+
+const _TabButton: React.FC<{
+  label: string;
+  onClick: () => void;
+  isAtivo: boolean;
+}> = React.memo(({ label, onClick, isAtivo }) => {
+  return (
+    <div
+      className={`inline-flex justify-center py-3 px-6 leading-6 font-medium rounded-md text-white transition duration-150 ease-in-out ${isAtivo ? 'bg-blue-600 dark:bg-transparent dark:text-yellow-300 dark:border-yellow-300' : 'hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 bg-blue-300 dark:bg-transparent dark:border-white dark:hover:text-yellow-500 dark:hover:border-yellow-500 cursor-pointer'}`}
+      onClick={isAtivo ? undefined : onClick}
+    >
+      {label}
+    </div>
+  );
+});
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const response = await fetch(
