@@ -76,7 +76,13 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
           <meta property="twitter:image" content={capa} />
         </>
       </Head>
-      <div className="bg-blue-primary dark:bg-gray-800 h-24 sm:h-36" />
+      <div className="bg-blue-primary h-36">
+        <div className={`container xl:w-full mx-auto px-4 sm:px-0`}>
+          <h1 className="text-white font-semibold leading-normal text-3xl pt-12">
+            Sistemas e Fiscalizações
+          </h1>
+        </div>
+      </div>
       <nav className="mx-2 sm:mx-12 px-4 py-2 xl:container xl:mx-auto rounded bg-gray-100 dark:bg-black-apoio shadow -mt-6 sm:-mt-4 mb-2">
         <ul className="flex flex-row flex-wrap">
           <li>
