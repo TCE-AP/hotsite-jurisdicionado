@@ -32,25 +32,23 @@ const NavegacaoSistemas: React.FC<NavegacaoSistemasProps> = ({ slug }) => {
             sist.slug === slug ? (
               <div
                 key={sist.id}
-                className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-800 dark:text-gray-400 rounded-md bg-gray-100 dark:bg-gray-800 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150"
+                className="group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-800 dark:text-gray-300 rounded-md bg-gray-100 dark:bg-gray-800 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:bg-gray-200 transition ease-in-out duration-150"
               >
                 <span>
                   {sist.sigla} - {sist.titulo}
                 </span>
               </div>
             ) : (
-              sist.slug !== slug && (
-                <Link key={sist.id} href={sist.slug}>
-                  <a
-                    key={sist.id}
-                    className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 rounded-md hover:text-gray-800 hover:bg-gray-50 dark:hover:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:text-gray-800 focus:bg-gray-50 transition ease-in-out duration-150"
-                  >
-                    <span>
-                      {sist.sigla} - {sist.titulo}
-                    </span>
-                  </a>
-                </Link>
-              )
+              <Link key={sist.id} href={sist.slug}>
+                <a
+                  key={sist.id}
+                  className="mt-1 group flex items-center px-3 py-2 text-sm leading-5 font-medium text-gray-600 dark:text-gray-400 rounded-md hover:text-gray-800 hover:bg-gray-50 dark:hover:text-gray-400 dark:hover:bg-gray-800 focus:outline-none focus:text-gray-800 focus:bg-gray-50 transition ease-in-out duration-150"
+                >
+                  <span>
+                    {sist.sigla} - {sist.titulo}
+                  </span>
+                </a>
+              </Link>
             ),
           )}
       </div>

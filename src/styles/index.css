@@ -10,3 +10,19 @@ html {
 }
 
 @tailwind utilities;
+
+.dark .dark\:prose {
+    color: white;
+    max-width: 65ch;
+}
+
+.dark .dark\:prose a {
+    color: #e9c82f;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.dark .dark\:prose strong {
+    color: #f1f1f1;
+    font-weight: 600;
+}

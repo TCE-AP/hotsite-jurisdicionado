@@ -49,8 +49,6 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
     }
   }, []);
 
-  console.log(sistemaCiclo2);
-
   return (
     <div className="dark:bg-gray-900">
       <Head>
@@ -110,7 +108,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
           <div className="w-full lg:w-3/4 relative py-4 bg-white dark:bg-gray-900 overflow-hidden">
             <div className="relative px-4 sm:px-6 lg:px-8">
               <div className="text-lg max-w-prose mx-auto mb-6">
-                <p className="text-base text-center leading-6 text-blue-apoio dark:text-gray-400 font-semibold tracking-wide uppercase">
+                <p className="text-base text-center leading-6 text-blue-apoio dark:text-gray-200 font-semibold tracking-wide uppercase">
                   Sistemas
                 </p>
                 <h1 className="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 dark:text-yellow-primary sm:text-4xl sm:leading-10">
@@ -158,7 +156,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
               )}
               {sistema ? (
                 <div
-                  className="prose prose-lg text-gray-600 dark:text-gray-400 mx-auto mt-2 text-justify"
+                  className="prose prose-lg dark:prose dark:prose-lg text-gray-600 dark:text-gray-300 mx-auto mt-2 text-justify"
                   dangerouslySetInnerHTML={{ __html: sistema.descricao }}
                 />
               ) : (
@@ -204,7 +202,7 @@ const _TabButton: React.FC<{
 }> = React.memo(({ label, onClick, isAtivo }) => {
   return (
     <div
-      className={`inline-flex justify-center py-3 px-6 leading-6 font-medium rounded-md text-white transition duration-150 ease-in-out ${isAtivo ? 'bg-blue-600 dark:bg-transparent dark:text-yellow-300 dark:border-yellow-300' : 'hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 bg-blue-300 dark:bg-transparent dark:border-white dark:hover:text-yellow-500 dark:hover:border-yellow-500 cursor-pointer'}`}
+      className={`inline-flex justify-center py-3 px-6 leading-6 font-medium rounded-md text-white transition duration-150 ease-in-out border dark:bg-transparent dark:border-white ${isAtivo ? 'bg-blue-600 dark:text-yellow-300 dark:border-yellow-300' : 'hover:bg-blue-500 focus:border-blue-700 focus:shadow-outline-blue active:bg-blue-700 bg-blue-300 dark:bg-transparent dark:border-white dark:hover:text-yellow-500 dark:hover:border-yellow-500 cursor-pointer'}`}
       onClick={isAtivo ? undefined : onClick}
     >
       {label}
