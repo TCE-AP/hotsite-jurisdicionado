@@ -51,5 +51,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       pagina,
     },
+    revalidate: 300,
   };
 };
