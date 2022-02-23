@@ -71,7 +71,7 @@ export default function ControleExternoSlug({
             </h1>
           </div>
           <div
-            className="prose prose-lg text-gray-500 dark:text-gray-400 mx-auto mt-2 text-justify"
+            className="prose prose-lg text-gray-600 dark:text-gray-400 mx-auto mt-2 text-justify"
             dangerouslySetInnerHTML={{ __html: conteudo }}
           />
         </div>

@@ -17,7 +17,7 @@ export default function PaginasSlug({ pagina }: PaginaProps): JSX.Element {
       <div className="relative py-4 overflow-hidden">
         <div className="relative px-4 sm:px-6 lg:px-8">
           <div
-            className="prose prose-lg dark:prose dark:prose-lg text-gray-500 dark:text-white mx-auto mt-2"
+            className="prose prose-lg dark:prose dark:prose-lg text-gray-600 dark:text-white mx-auto mt-2"
             dangerouslySetInnerHTML={{ __html: conteudo }}
           />
         </div>
