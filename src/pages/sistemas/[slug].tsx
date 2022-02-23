@@ -238,6 +238,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
     props: {
       sistema,
     },
-    revalidate: 1,
+    revalidate: 300,
   };
 };
