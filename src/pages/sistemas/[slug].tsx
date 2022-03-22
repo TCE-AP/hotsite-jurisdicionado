@@ -37,7 +37,7 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
   const isReceitas = sigla === 'RECEITAS';
 
   const [sistemaCiclo2, setSistemaCiclo2] = useState<SistemaDTO | undefined>();
-  const [cicloTab, setCicloTab] = useState<1 | 2>(1);
+  const [cicloTab, setCicloTab] = useState<1 | 2>(2);
 
   useEffect(() => {
     if (isReceitas) {
