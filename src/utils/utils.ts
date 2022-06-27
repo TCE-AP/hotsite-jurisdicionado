@@ -33,26 +33,6 @@ function ip2long(ip: string) {
   return parseInt(ip);
 }
 
-function isPrivate(clientIp: string) {
-  const nIP = ip2long(clientIp);
-
-  let arLocal = [
-    [ip2long('127.0.0.0'), 24],
-    [ip2long('10.0.0.0'), 20],
-    [ip2long('10.10.0.0'), 20],
-  ];
-
-  for (const arP of arLocal) {
-    const maskLo = ~((1 << arP[1]) - 1);
-
-    if ((nIP & maskLo) === arP[0])
-      return true;
-  }
-
-  return false;
-}
-
 export const Utils = {
     fetchApi,
-    isPrivate,
 };
