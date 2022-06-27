@@ -4,6 +4,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import PaginaDTO from '../../dtos/PaginaDTO';
+import { agent } from '../../utils/utils';
 
 interface PaginaProps {
   pagina: PaginaDTO;
@@ -81,9 +82,8 @@ export default function ControleExternoSlug({
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/paginas`,
-  );
+  const options = { agent } as RequestInit;
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/paginas`, options);
   const paginas = await response.json();
 
   const paths = paginas.map(({ slug }: PaginaDTO) => {
@@ -99,8 +99,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  const options = { agent } as RequestInit;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/paginas/${context.params?.slug}`,
+    options,
   );
   const pagina = await response.json();
 

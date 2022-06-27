@@ -11,6 +11,7 @@ import SecaoSection from '../../components/Sistemas/Sistema/SecaoSection';
 import VideoSection from '../../components/Sistemas/Sistema/VideoSection';
 import SistemaDTO from '../../dtos/SistemaDTO';
 import { useApi } from '../../hooks/useApi';
+import { agent } from '../../utils/utils';
 
 interface SistemaProps {
   sistema: SistemaDTO;
@@ -41,7 +42,8 @@ export default function SistemaSlug({ sistema }: SistemaProps): JSX.Element {
 
   useEffect(() => {
     if (isReceitas) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${sistemaCiclo2Slug}`)
+      const options = { agent } as RequestInit;
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${sistemaCiclo2Slug}`, options)
         .then(response => response.json())
         .then(json => {
           setSistemaCiclo2(json);
@@ -211,8 +213,10 @@ const _TabButton: React.FC<{
 });
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const options = { agent } as RequestInit;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas`,
+    options,
   );
   const sistemas = await response.json();
 
@@ -229,8 +233,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
+  const options = { agent } as RequestInit;
   const response = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/jurisdicionado/sistemas/${context.params?.slug}`,
+    options,
   );
   const sistema = await response.json();
 

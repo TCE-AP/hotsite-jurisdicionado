@@ -13,6 +13,10 @@ import 'pure-react-carousel/dist/react-carousel.es.css';
 import BannerCookies from '../components/BannerCookies';
 import logoFull from '../assets/logo-com-texto.svg';
 
+import axios from 'axios';
+import { agent } from '../utils/utils';
+axios.defaults.httpsAgent = agent;
+
 function MyApp({ Component, pageProps }: AppProps) {
   const onKeyUp = useCallback((keyName, e, handle) => {
     if (keyName === 'shift+1')
