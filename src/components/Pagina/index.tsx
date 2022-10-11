@@ -16,16 +16,16 @@ export type PaginaProps = {
 };
 
 const breadCrumbLinkItemCss =
-    'text-blue-primary dark:text-yellow-primary font-semibold hover:text-blue-apoio';
+  'text-blue-primary dark:text-yellow-primary font-semibold hover:text-blue-apoio';
 
 const Pagina: React.FC<PaginaProps> = (props) => {
   return (<>
     <Head>
       <title>TCE-AP | {props.title}</title>
     </Head>
-    <div className="bg-blue-primary h-36">
+    <div className="bg-blue-primary">
       <div className="container xl:w-4/6 mx-auto px-4 sm:px-0">
-        <h1 className="text-white font-semibold leading-normal text-3xl pt-12">
+        <h1 className="text-white font-semibold leading-normal text-lg md:text-3xl pt-12 pb-8">
           {props.topTitle ?? props.title}
         </h1>
       </div>
